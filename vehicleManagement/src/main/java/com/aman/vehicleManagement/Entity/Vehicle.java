@@ -1,11 +1,14 @@
 package com.aman.vehicleManagement.Entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 
@@ -13,8 +16,10 @@ import java.util.Date;
 @Table(name = "Vehicle")
 public class Vehicle {
     @Id
-    @Column(length = 10)
+    @Column(name = "registrationNo")
     private String registrationNo;
+    
+    
 
     @Column
     private int belongsToUserId;
@@ -23,7 +28,34 @@ public class Vehicle {
     @JoinColumn(name = "vehicleTypeId", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_Vehicle_VehicleType"))
     private VehicleType vehicleType;
 
-    @Column(length = 10)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "registrationNo", referencedColumnName = "registrationNo", foreignKey = @ForeignKey(name = "FK_Vehicle_registrationNo"))
+    private VehicleDetail vehicleDetails;
+    
+	public VehicleDetail getVehicleDetails() {
+		return vehicleDetails;
+	}
+
+	public void setVehicleDetails(VehicleDetail vehicleDetails) {
+		this.vehicleDetails = vehicleDetails;
+	}
+
+	public Integer getInspectedByUserId() {
+		return inspectedByUserId;
+	}
+
+	public void setInspectedByUserId(Integer inspectedByUserId) {
+		this.inspectedByUserId = inspectedByUserId;
+	}
+
+	@Override
+	public String toString() {
+		return "Vehicle [registrationNo=" + registrationNo + ", vehicleDetails=" + vehicleDetails + ", belongsToUserId="
+				+ belongsToUserId + ", vehicleType=" + vehicleType + ", inspectionStatus=" + inspectionStatus
+				+ ", inspectedByUserId=" + inspectedByUserId + ", inspectedOn=" + inspectedOn + "]";
+	}
+
+	@Column(length = 10)
     private String inspectionStatus;
 
     @Column

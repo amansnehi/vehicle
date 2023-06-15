@@ -12,7 +12,9 @@ import jakarta.persistence.Table;
 @Table(name = "VehicleType")
 public class VehicleType {
     @Id
+	
     private int ID;
+   
 
     @Column(length = 10)
     private String Type;

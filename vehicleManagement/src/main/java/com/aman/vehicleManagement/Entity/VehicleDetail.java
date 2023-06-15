@@ -12,11 +12,20 @@ import java.util.Date;
 @Entity
 @Table(name = "VehicleDetail")
 public class VehicleDetail {
-    @Id
-    @Column(length = 10)
-    private String registrationNo;
+	@Id
+	private String registrationNo;
+	
+    @Override
+	public String toString() {
+		return "VehicleDetail [registrationNo=" + registrationNo + ", RTOName=" + RTOName + ", registrationDate="
+				+ registrationDate + ", registrationExpiresOn=" + registrationExpiresOn + ", insuranceCompanyName="
+				+ insuranceCompanyName + ", insuranceNo=" + insuranceNo + ", insurancedOn=" + insurancedOn
+				+ ", insuranceExpiresOn=" + insuranceExpiresOn + ", insuranceCertificateDOCURL="
+				+ insuranceCertificateDOCURL + ", PUCCertificateNo=" + PUCCertificateNo + ", PUCIssuedOn=" + PUCIssuedOn
+				+ ", PUCValidUntil=" + PUCValidUntil + ", PUCDOCURL=" + PUCDOCURL + "]";
+	}
 
-    @Column(length = 10)
+	@Column(length = 10)
     private String RTOName;
 
     @Column
