@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,10 +36,14 @@ public class VehicleController {
 	public void deleteVehicleDetailsByRegistrationNo(@PathVariable(name="registrationNo") String regNo) {
 		vehicleService.deleteVehicleDetailByResigtrationNo(regNo);
 	}
-	
-//	@PostMapping("/approveorreject")
-//	public String updateStatus(@RequestBody Vehicle vehicle) {
-//		return (vehicleService.addVehicle(vehicle)).toString();
+
+	@GetMapping("/pendingapprovals/{pageno}")
+	public List<Vehicle> getPendingVehicles(@PathVariable(name="pageno") Integer pageNo){
+		return vehicleService.getAllPendingVehicles(pageNo);
+	}
+//	@PutMapping("/approveorreject/{pageno}")
+//	public List<Vehicle> updatePendingvehicles(@PathVariable Vehicle vehicle){
+//		 if(status=="Pending")
+//			 update
 //	}
-	
 }
